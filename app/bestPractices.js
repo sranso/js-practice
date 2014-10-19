@@ -21,8 +21,6 @@ define(function() {
       } else {
         return 'b';
       }
-
-      return getValue();
     },
 
     parseInt : function(num) {
