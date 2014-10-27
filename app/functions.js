@@ -25,7 +25,9 @@ define(function() {
     },
 
     partial : function(fn, str1, str2) {
-      // return fn.call(this, str1, str2);
+      return function(str3) {
+        return fn.call(this, str1, str2, str3);
+      };
     },
 
     useArguments : function() {
@@ -37,21 +39,32 @@ define(function() {
 
     callIt : function(fn) {
       var args = Array.prototype.slice.call(arguments, 1);
-      return fn.apply(this, args.slice(1, args.length));
+      return fn.apply(this, args);
     },
 
     partialUsingArguments : function(fn) {
-      // var args = Array.prototype.slice.call(arguments, 1);
+      // var givenArgs = Array.prototype.slice.call(arguments, 1);
       // var expectedArgs = fn.length;
-      // var givenArgs = args.length;
-      // if ( expectedArgs < givenArgs ) {
+      // var answer;
+      // if ( expectedArgs > givenArgs.length ) {
+      //   answer = function(n) {
+      //     fn.apply(this, givenArgs, n);
+      //   };
       // } else {
-      //   return fn();
+      //   answer = fn(givenArgs);
       // }
+      // debugger;
+      // return answer;
     },
 
     curryIt : function(fn) {
-
+      return function(a) {
+        return function(b) {
+          return function(c) {
+            return fn(a, b, c);
+          };
+        };
+      };
     }
   };
 });
